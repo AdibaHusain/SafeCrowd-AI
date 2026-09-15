@@ -28,11 +28,22 @@ def main():
     print(f"Training on: {device}")
 
     train_dataset = CrowdCountingDataset(cfg.train_data_dir)
-    val_dataset = CrowdCountingDataset(cfg.val_data_dir)
+    test_dataset = CrowdCountingDataset(cfg.test_data_dir)
+    
+    
+    train_loader = DataLoader(
+        train_dataset,
+        batch_size=cfg.batch_size,
+        shuffle=True,
+        num_workers=0
+    )
 
-    train_loader = DataLoader(train_dataset, batch_size=cfg.batch_size, shuffle=True, num_workers=2)
-    val_loader = DataLoader(val_dataset, batch_size=1, shuffle=False, num_workers=2)
-
+    test_loader = DataLoader(
+    test_dataset,
+    batch_size=1,
+    shuffle=False,
+    num_workers=0
+    )
     model = CSRNet().to(device)
     criterion = nn.MSELoss(reduction="sum")
     optimizer = torch.optim.Adam(model.parameters(), lr=cfg.learning_rate, weight_decay=cfg.weight_decay)
@@ -57,16 +68,17 @@ def main():
         print(f"Epoch {epoch}/{cfg.epochs} — loss: {avg_loss:.4f}")
 
         if epoch % cfg.save_every_n_epochs == 0 or epoch == cfg.epochs:
-            val_mae = validate(model, val_loader, device)
-            print(f"  Validation MAE: {val_mae:.2f}")
+            
+            test_mae = validate(model, test_loader, device)
+            print(f"  Test MAE: {test_mae:.2f}")
 
-            if val_mae < best_mae:
-                best_mae = val_mae
+            if test_mae < best_mae:
+                best_mae = test_mae
                 checkpoint_path = os.path.join(cfg.checkpoint_dir, "csrnet_best.pth")
                 torch.save(model.state_dict(), checkpoint_path)
                 print(f"  New best model saved -> {checkpoint_path} (MAE {best_mae:.2f})")
 
-    print(f"Training complete. Best validation MAE: {best_mae:.2f}")
+    print(f"Training complete. Best test MAE: {best_mae:.2f}")
 
 
 if __name__ == "__main__":
