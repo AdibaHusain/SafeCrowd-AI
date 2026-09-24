@@ -1,0 +1,1 @@
+"""SafeCrowdAI ML service application package."""
