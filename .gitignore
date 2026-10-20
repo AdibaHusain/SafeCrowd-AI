@@ -20,3 +20,20 @@ processed_partA/
 
 # Test/runtime artifacts
 .pytest_cache/
+# YOLOv9 training data and generated artifacts
+ml-training/yolov9m/data/
+ml-training/yolov9m/runs/
+ml-training/yolov9m/predictions/
+runs/
+
+# Allow the trained YOLOv9m model to be committed
+!ml-training/yolov9m/runs/yolov9m_person-2/weights/best.pt
+
+# Allow only the selected YOLOv9m best weights
+!ml-training/yolov9m/runs/
+ml-training/yolov9m/runs/*
+!ml-training/yolov9m/runs/yolov9m_person-2/
+ml-training/yolov9m/runs/yolov9m_person-2/*
+!ml-training/yolov9m/runs/yolov9m_person-2/weights/
+ml-training/yolov9m/runs/yolov9m_person-2/weights/*
+!ml-training/yolov9m/runs/yolov9m_person-2/weights/best.pt
