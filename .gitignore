@@ -4,3 +4,9 @@
 *.zip
 local_ckpt/
 __pycache__/
+
+*.pth
+*.pt
+*.zip
+local_ckpt/
+__pycache__/
