@@ -1,0 +1,1 @@
+"""SafeCrowdAI model package."""
