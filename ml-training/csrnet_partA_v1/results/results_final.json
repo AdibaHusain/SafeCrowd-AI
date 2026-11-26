@@ -1,0 +1,12 @@
+{
+  "model": "CSRNet",
+  "dataset": "ShanghaiTech Part A",
+  "best_epoch": 233,
+  "test_mae": 78.92,
+  "test_rmse": 123.65,
+  "mean_relative_error": 0.21,
+  "train_images": 300,
+  "test_images": 182,
+  "stage1": "SGD lr1e-6 mom0.95 wd5e-4, 300 epochs, crop+flip, batch 1",
+  "stage2_finetune": "lr1e-7, 60 epochs, no improvement (best 78.93)"
+}
