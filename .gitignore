@@ -32,3 +32,11 @@ processed_partA/
 
 # Test/runtime artifacts
 .pytest_cache/
+# YOLOv9 training data and generated artifacts
+ml-training/yolov9m/data/
+ml-training/yolov9m/runs/
+ml-training/yolov9m/predictions/
+runs/
+
+# Allow only the selected YOLOv9m v2 weights
+!ml-training/yolov9m/weights/best_v2.pt
