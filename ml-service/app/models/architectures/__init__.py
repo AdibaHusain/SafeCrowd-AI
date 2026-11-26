@@ -1,1 +1,0 @@
-"""SafeCrowdAI model architectures."""
